@@ -23,6 +23,7 @@ public class mainFrame extends javax.swing.JFrame {
         errorSigninPassword.setVisible(false);
         loginSuccesfullLBL.setVisible(false);
         loginUnsuccessfulLBL.setVisible(false);
+        errorSignUpPassword.setVisible(false);
 
     }
 
@@ -61,6 +62,7 @@ public class mainFrame extends javax.swing.JFrame {
         reset = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         errorUsername = new javax.swing.JLabel();
+        errorSignUpPassword = new javax.swing.JLabel();
         passwordSignup = new javax.swing.JPasswordField();
         usernameTxt = new javax.swing.JTextField();
         submit = new javax.swing.JLabel();
@@ -107,6 +109,11 @@ public class mainFrame extends javax.swing.JFrame {
         errorUsername.setFont(new java.awt.Font("Raleway Light", 0, 14)); // NOI18N
         errorUsername.setText("Please Enter a Valid Username");
         getContentPane().add(errorUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 220, -1));
+
+        errorSignUpPassword.setFont(new java.awt.Font("Raleway Light", 0, 14)); // NOI18N
+        errorSignUpPassword.setForeground(new java.awt.Color(255, 255, 255));
+        errorSignUpPassword.setText("Password atleast contains 6 characters");
+        getContentPane().add(errorSignUpPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, -1, -1));
 
         passwordSignup.setText("jPasswordField2");
         passwordSignup.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -237,33 +244,21 @@ public class mainFrame extends javax.swing.JFrame {
 
     /////////////////////////////////////////////////////////////////////////////////////////sign up clicked
     private void submitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitMouseClicked
+        boolean temp = true;
         if (users.size() > 0) {
             for (int i = 0; i < users.size(); i++) {
                 if (usernameTxt.getText().equals(users.get(i).getUsername())) {
                     errorUsername.setVisible(true);
+                    temp = false;
                     resetSignUp();
                     break;
                 }
             }
-        } else {
-            if (usernameTxt.getText().length() > 0) {
-                char[] password = passwordSignup.getPassword();
-                String passwordText = "";
-                for (int i = 0; i < password.length; i++) {
-                    passwordText += password[i];
-                }
-                user currentUser = new user(usernameTxt.getText(), passwordText, timeDifferanceArray, signUpRightShifted, signUpLeftShifted);
-
-                users.add(currentUser); //add timeDifferenceArray to the timeArrayAll
-
-                System.out.println(users.get(0).getTimeElapsed());
-                System.out.println("\n");
-
-                resetSignUp();//resetting fields
-
-            } else {
-                errorUsername.setVisible(true);
+            if (temp) {
+                addUser();
             }
+        } else {
+            addUser();
         }
 
     }//GEN-LAST:event_submitMouseClicked
@@ -331,7 +326,7 @@ public class mainFrame extends javax.swing.JFrame {
 
     /////////////////////////////////////////////////////////////////////////////////////////////Sign Up values
     private void passwordSignupKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignupKeyPressed
-
+        errorSignUpPassword.setVisible(false);
     }//GEN-LAST:event_passwordSignupKeyPressed
 
     private void passwordSignupKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignupKeyReleased
@@ -461,6 +456,33 @@ public class mainFrame extends javax.swing.JFrame {
         return Integer.MAX_VALUE;
     }
 
+    //add user to the user list when sign up
+    private void addUser() {
+        if (usernameTxt.getText().length() > 0) {
+            char[] password = passwordSignup.getPassword();
+            String passwordText = "";
+            if (password.length >= 8) {
+                for (int i = 0; i < password.length; i++) {
+                    passwordText += password[i];
+                }
+                user currentUser = new user(usernameTxt.getText(), passwordText, timeDifferanceArray, signUpRightShifted, signUpLeftShifted);
+
+                users.add(currentUser); //add timeDifferenceArray to the timeArrayAll
+
+                System.out.println(users.get(0).getTimeElapsed());
+                System.out.println("\n");
+
+                resetSignUp();//resetting fields
+
+            } else {
+                errorUsername.setVisible(true);
+            }
+        } else {
+            errorSignUpPassword.setVisible(true);
+            resetSignUp();
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -497,6 +519,7 @@ public class mainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel errorSignUpPassword;
     private javax.swing.JLabel errorSigninPassword;
     private javax.swing.JLabel errorUsername;
     private javax.swing.JLabel errorUsername1;
