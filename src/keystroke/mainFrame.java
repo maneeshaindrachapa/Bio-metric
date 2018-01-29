@@ -33,7 +33,7 @@ public class mainFrame extends javax.swing.JFrame {
     private long time31 = 0;
 
     //check which shift is using
-    private boolean signUpRightShifed = false;
+    private boolean signUpRightShifted = false;
     private boolean signInRightShifted = false;
     private boolean signUpLeftShifted = false;
     private boolean signInLeftShifted = false;
@@ -50,7 +50,7 @@ public class mainFrame extends javax.swing.JFrame {
     private boolean correct = false;
 
     //error margin
-    private double errorMargin = 0.10;
+    private double errorMargin = 0.30;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -237,29 +237,33 @@ public class mainFrame extends javax.swing.JFrame {
 
     /////////////////////////////////////////////////////////////////////////////////////////sign up clicked
     private void submitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitMouseClicked
-        if (usernameTxt.getText().length() > 0) {
-            char[] password = passwordSignup.getPassword();
-            String passwordText = "";
-            for (int i = 0; i < password.length; i++) {
-                passwordText += password[i];
+        if (users.size() > 0) {
+            for (int i = 0; i < users.size(); i++) {
+                if (usernameTxt.getText().equals(users.get(i).getUsername())) {
+                    errorUsername.setVisible(true);
+                    resetSignUp();
+                    break;
+                }
             }
-            user currentUser = new user(usernameTxt.getText(), passwordText, timeDifferanceArray, signUpRightShifed, signUpLeftShifted);
-
-            users.add(currentUser); //add timeDifferenceArray to the timeArrayAll
-            
-            System.out.println(signUpRightShifed);
-            System.out.println(users.get(0).getTimeElapsed());
-            System.out.println("\n");
-            
-            timeDifferanceArray.clear(); //clear timeDifferenceArray
-            signUpRightShifed = false; //setting right shift back to normal
-
-            //reset text fields
-            passwordSignup.setText(null);
-            usernameTxt.setText(null);
-
         } else {
-            errorUsername.setVisible(true);
+            if (usernameTxt.getText().length() > 0) {
+                char[] password = passwordSignup.getPassword();
+                String passwordText = "";
+                for (int i = 0; i < password.length; i++) {
+                    passwordText += password[i];
+                }
+                user currentUser = new user(usernameTxt.getText(), passwordText, timeDifferanceArray, signUpRightShifted, signUpLeftShifted);
+
+                users.add(currentUser); //add timeDifferenceArray to the timeArrayAll
+
+                System.out.println(users.get(0).getTimeElapsed());
+                System.out.println("\n");
+
+                resetSignUp();//resetting fields
+
+            } else {
+                errorUsername.setVisible(true);
+            }
         }
 
     }//GEN-LAST:event_submitMouseClicked
@@ -271,11 +275,7 @@ public class mainFrame extends javax.swing.JFrame {
 
     //when reset button pressed
     private void resetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetMouseClicked
-        passwordSignup.setText("");
-        usernameTxt.setText("");
-        timeDifferanceArray.clear();
-        signUpRightShifed = false;
-        signUpLeftShifted = false;
+        resetSignUp();
     }//GEN-LAST:event_resetMouseClicked
 
     private void submit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submit1MouseClicked
@@ -284,25 +284,23 @@ public class mainFrame extends javax.swing.JFrame {
             boolean valid = true;
             usernumber = getUser(usernameSignin.getText());
             if (usernumber != Integer.MAX_VALUE) {
+                //adding perticular user arrat list as userBiometric
                 ArrayList<String> userBiomatric = new ArrayList<>();
                 for (int j = 0; j < users.get(usernumber).getTimeElapsed().size(); j++) {
                     userBiomatric.add(users.get(usernumber).getTimeElapsed().get(j));
                 }
-                System.out.println(userBiomatric.size());
+
                 for (int i = 0; i < userBiomatric.size(); i++) {
                     int val = Integer.parseInt(timeDifferenceSignin.get(i));
                     int valOriginal = Integer.parseInt(userBiomatric.get(i));
                     int errormargin_range = (int) (valOriginal * errorMargin);
-                    if (users.get(usernumber).isRightShifted() == signUpRightShifed) {
+                    if (users.get(usernumber).isRightShifted() == signInRightShifted && users.get(usernumber).isLeftShifted() == signInLeftShifted) {
                         if ((valOriginal - errormargin_range) < val && val < (valOriginal + errormargin_range)) {
                             valid = true;
                         } else {
                             valid = false;
                             loginUnsuccessfulLBL.setVisible(true);
-                            passwordSignin.setText("");
-                            timeDifferenceSignin.clear();
-                            System.out.println(signUpRightShifed);
-                            signUpRightShifed = false;
+                            resetSignIn();
                             break;
                         }
                     } else {
@@ -310,40 +308,30 @@ public class mainFrame extends javax.swing.JFrame {
                         loginUnsuccessfulLBL.setVisible(true);
                         passwordSignin.setText("");
                         timeDifferenceSignin.clear();
-                        System.out.println(signUpRightShifed);
                         break;
                     }
                 }
                 if (valid) {
                     loginSuccesfullLBL.setVisible(true);
-                    passwordSignin.setText(""); //resetting all the values
-                    usernameSignin.setText("");
-                    signUpLeftShifted = false;
-                    signUpRightShifed = false;
-                    timeDifferenceSignin.clear();
+                    resetSignIn();
                 }
             } else {
                 //there is an error in username and password
             }
         } catch (Exception e) {
             loginSuccesfullLBL.setVisible(true);
-            passwordSignin.setText("");
-            timeDifferenceSignin.clear();
+            resetSignIn();
         }
 
     }//GEN-LAST:event_submit1MouseClicked
 
     private void reset1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reset1MouseClicked
-        passwordSignin.setText("");
-        timeDifferenceSignin.clear();
-        usernameSignin.setText("");
-        signUpLeftShifted = false;
-        signUpRightShifed = false;
+        resetSignIn();
     }//GEN-LAST:event_reset1MouseClicked
 
     /////////////////////////////////////////////////////////////////////////////////////////////Sign Up values
     private void passwordSignupKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignupKeyPressed
-  
+
     }//GEN-LAST:event_passwordSignupKeyPressed
 
     private void passwordSignupKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignupKeyReleased
@@ -354,9 +342,9 @@ public class mainFrame extends javax.swing.JFrame {
             time2 = 0;
             time3 = 0;
         }
-        if (evt.getKeyCode()==evt.VK_SHIFT) {
+        if (evt.getKeyCode() == evt.VK_SHIFT) {
             if (evt.getKeyLocation() == evt.KEY_LOCATION_RIGHT) {
-                signUpRightShifed = true;
+                signUpRightShifted = true;
             }
             if (evt.getKeyLocation() == evt.KEY_LOCATION_LEFT) {
                 signUpLeftShifted = true;
@@ -424,6 +412,24 @@ public class mainFrame extends javax.swing.JFrame {
     private String calculateTimeKeyStroke(long time2, long time3) {
         //System.out.println("time between two letters "+(time3-time2));
         return (time3 - time2) + "";
+    }
+
+    //resetting sign up
+    private void resetSignUp() {
+        timeDifferanceArray.clear();
+        passwordSignup.setText("");
+        usernameTxt.setText("");
+        signUpLeftShifted = false;
+        signUpRightShifted = false;
+    }
+
+    //resetting sign in
+    private void resetSignIn() {
+        timeDifferenceSignin.clear();
+        passwordSignin.setText("");
+        usernameSignin.setText("");
+        signInLeftShifted = false;
+        signInRightShifted = false;
     }
 
     //get user details
