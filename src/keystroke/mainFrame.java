@@ -18,39 +18,40 @@ public class mainFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         errorUsername.setVisible(false);
         errorUsername1.setVisible(false);
-        passwordSignIn.setText("");
-        passwordSignUp.setText("");
-        errorSignUpPassword.setVisible(false);
+        passwordSignup.setText("");
+        passwordSignin.setText("");
+        errorSigninPassword.setVisible(false);
         loginSuccesfullLBL.setVisible(false);
         loginUnsuccessfulLBL.setVisible(false);
-              
+
     }
-    
+
     //variables for time
-    private long time1=0; //key pressed time
-    private long time2=0; //key released time
-    private long time3=0; //difference between two keystrokes
-    private long time21=0;
-    private long time31=0;
-    
+    private long time2 = 0; //key released time
+    private long time3 = 0; //difference between two keystrokes
+    private long time21 = 0;
+    private long time31 = 0;
+
     //check which shift is using
-    private boolean signUpRightShifed=false;
-    private boolean singnInRightShifted=false;
-    
+    private boolean signUpRightShifed = false;
+    private boolean signInRightShifted = false;
+    private boolean signUpLeftShifted = false;
+    private boolean signInLeftShifted = false;
+
     //to add users in to arraylist
-    private ArrayList<user> users=new ArrayList<>();
+    private ArrayList<user> users = new ArrayList<>();
     //to store the data in arraylist
-    private ArrayList<String> timeDifferanceArray=new ArrayList<>();
-    
-    //to store the data for the sign up
-    private ArrayList<String> timeDifferenceSignUp=new ArrayList<>();
-    
+    private ArrayList<String> timeDifferanceArray = new ArrayList<>();
+
+    //to store the data for the sign in
+    private ArrayList<String> timeDifferenceSignin = new ArrayList<>();
+
     //boolean value to set the character,character array 
-    private boolean correct=false;
-    
+    private boolean correct = false;
+
     //error margin
-    private double errorMargin=0.10;
-    
+    private double errorMargin = 0.10;
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -60,16 +61,16 @@ public class mainFrame extends javax.swing.JFrame {
         reset = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         errorUsername = new javax.swing.JLabel();
-        passwordSignIn = new javax.swing.JPasswordField();
+        passwordSignup = new javax.swing.JPasswordField();
         usernameTxt = new javax.swing.JTextField();
         submit = new javax.swing.JLabel();
         exitlbl = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        errorSignUpPassword = new javax.swing.JLabel();
-        usernameSignup = new javax.swing.JTextField();
-        passwordSignUp = new javax.swing.JPasswordField();
+        errorSigninPassword = new javax.swing.JLabel();
+        usernameSignin = new javax.swing.JTextField();
+        passwordSignin = new javax.swing.JPasswordField();
         loginUnsuccessfulLBL = new javax.swing.JLabel();
         loginSuccesfullLBL = new javax.swing.JLabel();
         errorUsername1 = new javax.swing.JLabel();
@@ -107,19 +108,19 @@ public class mainFrame extends javax.swing.JFrame {
         errorUsername.setText("Please Enter a Valid Username");
         getContentPane().add(errorUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 220, -1));
 
-        passwordSignIn.setText("jPasswordField2");
-        passwordSignIn.addKeyListener(new java.awt.event.KeyAdapter() {
+        passwordSignup.setText("jPasswordField2");
+        passwordSignup.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                passwordSignInKeyPressed(evt);
+                passwordSignupKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                passwordSignInKeyReleased(evt);
+                passwordSignupKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                passwordSignInKeyTyped(evt);
+                passwordSignupKeyTyped(evt);
             }
         });
-        getContentPane().add(passwordSignIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 870, 40));
+        getContentPane().add(passwordSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 870, 40));
 
         usernameTxt.setFont(new java.awt.Font("Raleway Light", 0, 14)); // NOI18N
         usernameTxt.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -163,31 +164,31 @@ public class mainFrame extends javax.swing.JFrame {
         jLabel7.setText("Sign Up");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
 
-        errorSignUpPassword.setFont(new java.awt.Font("Raleway Light", 0, 14)); // NOI18N
-        errorSignUpPassword.setForeground(new java.awt.Color(255, 255, 255));
-        errorSignUpPassword.setText("Password is Incorrect");
-        getContentPane().add(errorSignUpPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 400, -1, -1));
+        errorSigninPassword.setFont(new java.awt.Font("Raleway Light", 0, 14)); // NOI18N
+        errorSigninPassword.setForeground(new java.awt.Color(255, 255, 255));
+        errorSigninPassword.setText("Password is Incorrect");
+        getContentPane().add(errorSigninPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 400, -1, -1));
 
-        usernameSignup.addKeyListener(new java.awt.event.KeyAdapter() {
+        usernameSignin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                usernameSignupKeyPressed(evt);
+                usernameSigninKeyPressed(evt);
             }
         });
-        getContentPane().add(usernameSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, 190, 30));
+        getContentPane().add(usernameSignin, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, 190, 30));
 
-        passwordSignUp.setText("jPasswordField1");
-        passwordSignUp.addKeyListener(new java.awt.event.KeyAdapter() {
+        passwordSignin.setText("jPasswordField1");
+        passwordSignin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                passwordSignUpKeyPressed(evt);
+                passwordSigninKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                passwordSignUpKeyReleased(evt);
+                passwordSigninKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                passwordSignUpKeyTyped(evt);
+                passwordSigninKeyTyped(evt);
             }
         });
-        getContentPane().add(passwordSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 860, 40));
+        getContentPane().add(passwordSignin, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 860, 40));
 
         loginUnsuccessfulLBL.setFont(new java.awt.Font("Raleway Light", 0, 18)); // NOI18N
         loginUnsuccessfulLBL.setText("Login Unsuccesful");
@@ -233,30 +234,30 @@ public class mainFrame extends javax.swing.JFrame {
     private void exitlblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitlblMouseClicked
         this.dispose();
     }//GEN-LAST:event_exitlblMouseClicked
-    
-    //sign up clicked
+
+    /////////////////////////////////////////////////////////////////////////////////////////sign up clicked
     private void submitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitMouseClicked
-        if(usernameTxt.getText().length()>0){
-            char[] password=passwordSignIn.getPassword();
-            String passwordText="";
-            for(int i=0;i<password.length;i++){
-                passwordText+=password[i];
+        if (usernameTxt.getText().length() > 0) {
+            char[] password = passwordSignup.getPassword();
+            String passwordText = "";
+            for (int i = 0; i < password.length; i++) {
+                passwordText += password[i];
             }
-            user currentUser=new user(usernameTxt.getText(),passwordText,timeDifferanceArray,signUpRightShifed);
-            
+            user currentUser = new user(usernameTxt.getText(), passwordText, timeDifferanceArray, signUpRightShifed, signUpLeftShifted);
+
             users.add(currentUser); //add timeDifferenceArray to the timeArrayAll
             timeDifferanceArray.clear(); //clear timeDifferenceArray
-            signUpRightShifed=false; //setting right shift back to normal
-            
-            System.out.println(passwordText);
+            signUpRightShifed = false; //setting right shift back to normal
+
+            System.out.println(signUpRightShifed);
             System.out.println(users.get(0).getTimeElapsed());
             System.out.println("\n");
-            
+
             //reset text fields
-            passwordSignIn.setText(null);
+            passwordSignup.setText(null);
             usernameTxt.setText(null);
-              
-        }else{
+
+        } else {
             errorUsername.setVisible(true);
         }
 
@@ -269,147 +270,189 @@ public class mainFrame extends javax.swing.JFrame {
 
     //when reset button pressed
     private void resetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetMouseClicked
-        passwordSignIn.setText("");
+        passwordSignup.setText("");
         usernameTxt.setText("");
         timeDifferanceArray.clear();
-        signUpRightShifed=false;
+        signUpRightShifed = false;
+        signUpLeftShifted = false;
     }//GEN-LAST:event_resetMouseClicked
 
     private void submit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submit1MouseClicked
-        try{
-        int usernumber=0;
-        boolean valid=true;
-        usernumber=getUser(usernameSignup.getText());
-        if(usernumber!=Integer.MAX_VALUE){
-            ArrayList<String> userBiomatric=new ArrayList<>();
-            for(int j=0;j<users.get(usernumber).getTimeElapsed().size();j++){
-                userBiomatric.add(users.get(usernumber).getTimeElapsed().get(j));
-            }
-            System.out.println(userBiomatric.size());
-            for(int i=0;i<userBiomatric.size();i++){
-                int val=Integer.parseInt(timeDifferenceSignUp.get(i));
-                int valOriginal=Integer.parseInt(userBiomatric.get(i));
-                int errormargin_range=(int)(valOriginal*errorMargin);
-                if((valOriginal-errormargin_range)<val && val<(valOriginal+errormargin_range)){
-                    valid=true;
-                }else{
-                    valid=false;
-                    loginUnsuccessfulLBL.setVisible(true);
-                    passwordSignUp.setText("");
-                    timeDifferenceSignUp.clear();
-                    break;
+        try {
+            int usernumber = 0;
+            boolean valid = true;
+            usernumber = getUser(usernameSignin.getText());
+            if (usernumber != Integer.MAX_VALUE) {
+                ArrayList<String> userBiomatric = new ArrayList<>();
+                for (int j = 0; j < users.get(usernumber).getTimeElapsed().size(); j++) {
+                    userBiomatric.add(users.get(usernumber).getTimeElapsed().get(j));
                 }
-               
+                System.out.println(userBiomatric.size());
+                for (int i = 0; i < userBiomatric.size(); i++) {
+                    int val = Integer.parseInt(timeDifferenceSignin.get(i));
+                    int valOriginal = Integer.parseInt(userBiomatric.get(i));
+                    int errormargin_range = (int) (valOriginal * errorMargin);
+                    if (users.get(usernumber).isRightShifted() == signUpRightShifed) {
+                        if ((valOriginal - errormargin_range) < val && val < (valOriginal + errormargin_range)) {
+                            valid = true;
+                        } else {
+                            valid = false;
+                            loginUnsuccessfulLBL.setVisible(true);
+                            passwordSignin.setText("");
+                            timeDifferenceSignin.clear();
+                            System.out.println(signUpRightShifed);
+                            signUpRightShifed = false;
+                            break;
+                        }
+                    } else {
+                        valid = false;
+                        loginUnsuccessfulLBL.setVisible(true);
+                        passwordSignin.setText("");
+                        timeDifferenceSignin.clear();
+                        System.out.println(signUpRightShifed);
+                        break;
+                    }
+                }
+                if (valid) {
+                    loginSuccesfullLBL.setVisible(true);
+                    passwordSignin.setText(""); //resetting all the values
+                    usernameSignin.setText("");
+                    signUpLeftShifted = false;
+                    signUpRightShifed = false;
+                    timeDifferenceSignin.clear();
+                }
+            } else {
+                //there is an error in username and password
             }
-            if(valid){
-                loginSuccesfullLBL.setVisible(true);
-                passwordSignUp.setText("");
-                usernameSignup.setText("");
-            }
-        }else{
-            //there is an error in username and password
-        }
-        }catch(Exception e){
+        } catch (Exception e) {
             loginSuccesfullLBL.setVisible(true);
-            passwordSignUp.setText("");
-            timeDifferenceSignUp.clear();
+            passwordSignin.setText("");
+            timeDifferenceSignin.clear();
         }
-        
+
     }//GEN-LAST:event_submit1MouseClicked
 
     private void reset1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reset1MouseClicked
-        passwordSignUp.setText("");
-        timeDifferenceSignUp.clear();
+        passwordSignin.setText("");
+        timeDifferenceSignin.clear();
+        usernameSignin.setText("");
+        signUpLeftShifted = false;
+        signUpRightShifed = false;
     }//GEN-LAST:event_reset1MouseClicked
 
-    private void passwordSignInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignInKeyPressed
-         time1=System.currentTimeMillis();
-    }//GEN-LAST:event_passwordSignInKeyPressed
+    /////////////////////////////////////////////////////////////////////////////////////////////Sign Up values
+    private void passwordSignupKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignupKeyPressed
+        if (evt.getKeyCode()==evt.VK_SHIFT) {
+            if (evt.getKeyLocation() == evt.KEY_LOCATION_RIGHT) {
+                signUpRightShifed = true;
+            }
+            if (evt.getKeyLocation() == evt.KEY_LOCATION_LEFT) {
+                signUpLeftShifted = true;
+            }
+        }
+    }//GEN-LAST:event_passwordSignupKeyPressed
 
-    private void passwordSignInKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignInKeyReleased
-        time2=System.currentTimeMillis();
-        if(evt.getKeyCode()==evt.VK_BACK_SPACE){
-            passwordSignIn.setText("");
+    private void passwordSignupKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignupKeyReleased
+        time2 = System.currentTimeMillis();
+        if (evt.getKeyCode() == evt.VK_BACK_SPACE) {
+            passwordSignup.setText("");
             timeDifferanceArray.clear();
-            time1=0;
-            time2=0;
-            time3=0;
+            time2 = 0;
+            time3 = 0;
         }
-    }//GEN-LAST:event_passwordSignInKeyReleased
 
-    private void passwordSignInKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignInKeyTyped
-        time3=System.currentTimeMillis();
-        if(passwordSignIn.getPassword().length>0){
-        timeDifferanceArray.add(calculateTimeKeyStroke(time2, time3));
-        System.out.println(timeDifferanceArray);
+    }//GEN-LAST:event_passwordSignupKeyReleased
+
+    private void passwordSignupKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignupKeyTyped
+        time3 = System.currentTimeMillis();
+        if (passwordSignup.getPassword().length > 0) {
+            timeDifferanceArray.add(calculateTimeKeyStroke(time2, time3));
+            System.out.println(timeDifferanceArray);
         }
-    }//GEN-LAST:event_passwordSignInKeyTyped
+    }//GEN-LAST:event_passwordSignupKeyTyped
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private void usernameSignupKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameSignupKeyPressed
+    //////////////////////////////////////////////////////////////////////////////////////Sign up
+    private void usernameSigninKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameSigninKeyPressed
         errorUsername1.setVisible(false);
         loginSuccesfullLBL.setVisible(false);
         loginUnsuccessfulLBL.setVisible(false);
-    }//GEN-LAST:event_usernameSignupKeyPressed
+    }//GEN-LAST:event_usernameSigninKeyPressed
 
-    private void passwordSignUpKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignUpKeyReleased
-        time21=System.currentTimeMillis();
-        if(evt.getKeyCode()==evt.VK_BACK_SPACE){
-            passwordSignUp.setText("");
-            timeDifferenceSignUp.clear();
-            time21=0;
-            time31=0;
+    private void passwordSigninKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSigninKeyReleased
+        time21 = System.currentTimeMillis();
+        if (evt.getKeyCode() == evt.VK_BACK_SPACE) {
+            passwordSignin.setText("");
+            timeDifferenceSignin.clear();
+            time21 = 0;
+            time31 = 0;
         }
-    }//GEN-LAST:event_passwordSignUpKeyReleased
 
-    private void passwordSignUpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignUpKeyTyped
-        time31=System.currentTimeMillis();
-        if(passwordSignUp.getPassword().length>0){
-        timeDifferenceSignUp.add(calculateTimeKeyStroke(time21, time31));
-        System.out.println(timeDifferenceSignUp);
+    }//GEN-LAST:event_passwordSigninKeyReleased
+
+    private void passwordSigninKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSigninKeyTyped
+        time31 = System.currentTimeMillis();
+        if (passwordSignin.getPassword().length > 0) {
+            timeDifferenceSignin.add(calculateTimeKeyStroke(time21, time31));
+            System.out.println(timeDifferenceSignin);
         }
-    }//GEN-LAST:event_passwordSignUpKeyTyped
+    }//GEN-LAST:event_passwordSigninKeyTyped
 
-    private void passwordSignUpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignUpKeyPressed
+    private void passwordSigninKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSigninKeyPressed
         loginSuccesfullLBL.setVisible(false);
         loginUnsuccessfulLBL.setVisible(false);
-        errorSignUpPassword.setVisible(false);
-    }//GEN-LAST:event_passwordSignUpKeyPressed
-    
+        errorSigninPassword.setVisible(false);
+        if (evt.getKeyCode() == evt.VK_SHIFT) {
+            if (evt.getKeyLocation() == evt.KEY_LOCATION_RIGHT) {
+                signInRightShifted = true;
+            }
+            if (evt.getKeyLocation() == evt.KEY_LOCATION_LEFT) {
+                signInLeftShifted = true;
+            }
+        }
+    }//GEN-LAST:event_passwordSigninKeyPressed
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     //calculate time diffrence between key released and key pressed
-    private void calculateTimeDifferance(long time1,long time2){
+    private void calculateTimeDifferance(long time1, long time2) {
         //System.out.println(time2+" "+time1+":"+(time2-time1));
     }
+
     //calculate time difference between two key strokes
-    private String calculateTimeKeyStroke(long time2,long time3){
+    private String calculateTimeKeyStroke(long time2, long time3) {
         //System.out.println("time between two letters "+(time3-time2));
-        return (time3-time2)+"";
+        return (time3 - time2) + "";
     }
+
     //get user details
-    private int getUser(String username){
-        for(int i=0;i<users.size();i++){
-            if(users.get(i).getUsername().equals(username)){
-                char[] passwordSignUpArray=passwordSignUp.getPassword();//getting signup password
-                String password_SignUp=""; //making a variable for the password
-                for(int j=0;j<passwordSignUpArray.length;j++){
-                    password_SignUp+=passwordSignUpArray[j]; //adding charcter array and making the password as a string
+    private int getUser(String username) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUsername().equals(username)) {
+                char[] passwordSignUpArray = passwordSignin.getPassword();//getting signup password
+                String password_SignUp = ""; //making a variable for the password
+                for (int j = 0; j < passwordSignUpArray.length; j++) {
+                    password_SignUp += passwordSignUpArray[j]; //adding charcter array and making the password as a string
                 }
-                if(users.get(i).getPassword().equals(password_SignUp)){
+                if (users.get(i).getPassword().equals(password_SignUp)) {
                     return i;
-                }
-                else{
-                    errorSignUpPassword.setVisible(true);
-                    passwordSignUp.setText("");
-                    timeDifferenceSignUp.clear();//clearing sign up password array
+                } else {
+                    errorSigninPassword.setVisible(true);
+                    passwordSignin.setText("");
+                    timeDifferenceSignin.clear();//clearing sign up password array
+                    signInLeftShifted = false;
+                    signInRightShifted = false;
                     return Integer.MAX_VALUE;
                 }
             }
         }
-        errorUsername1.setVisible(true);
-        passwordSignUp.setText("");
-        timeDifferenceSignUp.clear();
+        errorUsername1.setVisible(true); //when error occurs setting all the values to the initial values
+        passwordSignin.setText("");
+        timeDifferenceSignin.clear();
+        signInLeftShifted = false;
+        signInRightShifted = false;
         return Integer.MAX_VALUE;
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -446,7 +489,7 @@ public class mainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel errorSignUpPassword;
+    private javax.swing.JLabel errorSigninPassword;
     private javax.swing.JLabel errorUsername;
     private javax.swing.JLabel errorUsername1;
     private javax.swing.JLabel exitlbl;
@@ -459,13 +502,13 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel loginSuccesfullLBL;
     private javax.swing.JLabel loginUnsuccessfulLBL;
-    private javax.swing.JPasswordField passwordSignIn;
-    private javax.swing.JPasswordField passwordSignUp;
+    private javax.swing.JPasswordField passwordSignin;
+    private javax.swing.JPasswordField passwordSignup;
     private javax.swing.JLabel reset;
     private javax.swing.JLabel reset1;
     private javax.swing.JLabel submit;
     private javax.swing.JLabel submit1;
-    private javax.swing.JTextField usernameSignup;
+    private javax.swing.JTextField usernameSignin;
     private javax.swing.JTextField usernameTxt;
     // End of variables declaration//GEN-END:variables
 }
