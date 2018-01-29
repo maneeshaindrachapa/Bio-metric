@@ -51,7 +51,7 @@ public class mainFrame extends javax.swing.JFrame {
     private boolean correct = false;
 
     //error margin
-    private double errorMargin = 0.30;
+    private double errorMargin = 0.40;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -461,7 +461,7 @@ public class mainFrame extends javax.swing.JFrame {
         if (usernameTxt.getText().length() > 0) {
             char[] password = passwordSignup.getPassword();
             String passwordText = "";
-            if (password.length >= 8) {
+            if (password.length >= 6) {
                 for (int i = 0; i < password.length; i++) {
                     passwordText += password[i];
                 }
