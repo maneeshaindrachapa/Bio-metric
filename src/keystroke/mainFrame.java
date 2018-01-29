@@ -475,11 +475,11 @@ public class mainFrame extends javax.swing.JFrame {
                 resetSignUp();//resetting fields
 
             } else {
-                errorUsername.setVisible(true);
+                errorSignUpPassword.setVisible(true);
+                resetSignUp();
             }
         } else {
-            errorSignUpPassword.setVisible(true);
-            resetSignUp();
+            errorUsername.setVisible(true);
         }
     }
 
