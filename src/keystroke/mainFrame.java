@@ -246,12 +246,13 @@ public class mainFrame extends javax.swing.JFrame {
             user currentUser = new user(usernameTxt.getText(), passwordText, timeDifferanceArray, signUpRightShifed, signUpLeftShifted);
 
             users.add(currentUser); //add timeDifferenceArray to the timeArrayAll
-            timeDifferanceArray.clear(); //clear timeDifferenceArray
-            signUpRightShifed = false; //setting right shift back to normal
-
+            
             System.out.println(signUpRightShifed);
             System.out.println(users.get(0).getTimeElapsed());
             System.out.println("\n");
+            
+            timeDifferanceArray.clear(); //clear timeDifferenceArray
+            signUpRightShifed = false; //setting right shift back to normal
 
             //reset text fields
             passwordSignup.setText(null);
@@ -342,14 +343,7 @@ public class mainFrame extends javax.swing.JFrame {
 
     /////////////////////////////////////////////////////////////////////////////////////////////Sign Up values
     private void passwordSignupKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignupKeyPressed
-        if (evt.getKeyCode()==evt.VK_SHIFT) {
-            if (evt.getKeyLocation() == evt.KEY_LOCATION_RIGHT) {
-                signUpRightShifed = true;
-            }
-            if (evt.getKeyLocation() == evt.KEY_LOCATION_LEFT) {
-                signUpLeftShifted = true;
-            }
-        }
+  
     }//GEN-LAST:event_passwordSignupKeyPressed
 
     private void passwordSignupKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordSignupKeyReleased
@@ -359,6 +353,14 @@ public class mainFrame extends javax.swing.JFrame {
             timeDifferanceArray.clear();
             time2 = 0;
             time3 = 0;
+        }
+        if (evt.getKeyCode()==evt.VK_SHIFT) {
+            if (evt.getKeyLocation() == evt.KEY_LOCATION_RIGHT) {
+                signUpRightShifed = true;
+            }
+            if (evt.getKeyLocation() == evt.KEY_LOCATION_LEFT) {
+                signUpLeftShifted = true;
+            }
         }
 
     }//GEN-LAST:event_passwordSignupKeyReleased
@@ -387,6 +389,14 @@ public class mainFrame extends javax.swing.JFrame {
             time21 = 0;
             time31 = 0;
         }
+        if (evt.getKeyCode() == evt.VK_SHIFT) {
+            if (evt.getKeyLocation() == evt.KEY_LOCATION_RIGHT) {
+                signInRightShifted = true;
+            }
+            if (evt.getKeyLocation() == evt.KEY_LOCATION_LEFT) {
+                signInLeftShifted = true;
+            }
+        }
 
     }//GEN-LAST:event_passwordSigninKeyReleased
 
@@ -402,14 +412,6 @@ public class mainFrame extends javax.swing.JFrame {
         loginSuccesfullLBL.setVisible(false);
         loginUnsuccessfulLBL.setVisible(false);
         errorSigninPassword.setVisible(false);
-        if (evt.getKeyCode() == evt.VK_SHIFT) {
-            if (evt.getKeyLocation() == evt.KEY_LOCATION_RIGHT) {
-                signInRightShifted = true;
-            }
-            if (evt.getKeyLocation() == evt.KEY_LOCATION_LEFT) {
-                signInLeftShifted = true;
-            }
-        }
     }//GEN-LAST:event_passwordSigninKeyPressed
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
