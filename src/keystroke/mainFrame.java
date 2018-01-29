@@ -33,6 +33,10 @@ public class mainFrame extends javax.swing.JFrame {
     private long time21=0;
     private long time31=0;
     
+    //check which shift is using
+    private boolean signUpRightShifed=false;
+    private boolean singnInRightShifted=false;
+    
     //to add users in to arraylist
     private ArrayList<user> users=new ArrayList<>();
     //to store the data in arraylist
@@ -238,9 +242,12 @@ public class mainFrame extends javax.swing.JFrame {
             for(int i=0;i<password.length;i++){
                 passwordText+=password[i];
             }
-            user currentUser=new user(usernameTxt.getText(),passwordText,timeDifferanceArray);
+            user currentUser=new user(usernameTxt.getText(),passwordText,timeDifferanceArray,signUpRightShifed);
+            
             users.add(currentUser); //add timeDifferenceArray to the timeArrayAll
             timeDifferanceArray.clear(); //clear timeDifferenceArray
+            signUpRightShifed=false; //setting right shift back to normal
+            
             System.out.println(passwordText);
             System.out.println(users.get(0).getTimeElapsed());
             System.out.println("\n");
@@ -265,6 +272,7 @@ public class mainFrame extends javax.swing.JFrame {
         passwordSignIn.setText("");
         usernameTxt.setText("");
         timeDifferanceArray.clear();
+        signUpRightShifed=false;
     }//GEN-LAST:event_resetMouseClicked
 
     private void submit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submit1MouseClicked
