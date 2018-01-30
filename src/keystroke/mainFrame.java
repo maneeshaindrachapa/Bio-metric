@@ -305,13 +305,15 @@ public class mainFrame extends javax.swing.JFrame {
                     }
                 }
                 if (count <= userBiomatric.size() * 0.3) {
-                    loginSuccesfullLBL.setVisible(true);
-                    resetSignIn();
+                    if (!loginUnsuccessfulLBL.isVisible()) {
+                        loginSuccesfullLBL.setVisible(true);
+                        resetSignIn();
+                    }
                 } else {
                     valid = false;
                     loginUnsuccessfulLBL.setVisible(true);
                     resetSignIn();
-                    
+
                 }
             } else {
 
