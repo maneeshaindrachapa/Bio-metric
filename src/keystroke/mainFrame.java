@@ -51,7 +51,7 @@ public class mainFrame extends javax.swing.JFrame {
     private boolean correct = false;
 
     //error margin
-    private double errorMargin = 0.40;
+    private double errorMargin = 0.70;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -276,6 +276,7 @@ public class mainFrame extends javax.swing.JFrame {
     private void submit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submit1MouseClicked
         try {
             int usernumber = 0;
+            int count = 0;
             boolean valid = true;
             usernumber = getUser(usernameSignin.getText());
             if (usernumber != Integer.MAX_VALUE) {
@@ -293,10 +294,7 @@ public class mainFrame extends javax.swing.JFrame {
                         if ((valOriginal - errormargin_range) < val && val < (valOriginal + errormargin_range)) {
                             valid = true;
                         } else {
-                            valid = false;
-                            loginUnsuccessfulLBL.setVisible(true);
-                            resetSignIn();
-                            break;
+                            count++;
                         }
                     } else {
                         valid = false;
@@ -306,11 +304,17 @@ public class mainFrame extends javax.swing.JFrame {
                         break;
                     }
                 }
-                if (valid) {
+                if (count <= userBiomatric.size() * 0.3) {
                     loginSuccesfullLBL.setVisible(true);
                     resetSignIn();
+                } else {
+                    valid = false;
+                    loginUnsuccessfulLBL.setVisible(true);
+                    resetSignIn();
+                    
                 }
             } else {
+
                 //there is an error in username and password
             }
         } catch (Exception e) {
